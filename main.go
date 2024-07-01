@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"os"
 	"path/filepath"
 
-	"github.com/AllenDang/PipeIt/pipe"
 	g "github.com/AllenDang/giu"
+	"github.com/dizorin/PipeIt/pipe"
 )
 
 const (
@@ -75,10 +75,10 @@ func buildConfigMenu(index int, configUI g.Layout) g.Layout {
 	return g.Layout{
 		g.Custom(func() {
 			if configUI != nil {
-				g.ContextMenu().ID(fmt.Sprintf("%s##%d", "configMenu", index)).MouseButton(g.MouseButtonLeft).Layout(configUI).Build()
+				g.ContextMenu().ID(g.ID(fmt.Sprintf("%s##%d", "configMenu", index))).MouseButton(g.MouseButtonLeft).Layout(configUI).Build()
 			}
 		}),
-		g.ContextMenu().ID(fmt.Sprintf("%s##%d", "opMenu", index)).MouseButton(g.MouseButtonRight).Layout(g.Layout{
+		g.ContextMenu().ID(g.ID(fmt.Sprintf("%s##%d", "opMenu", index))).MouseButton(g.MouseButtonRight).Layout(g.Layout{
 			addBeforeMenu,
 			g.Selectable("Delete").OnClick(func() {
 				pipeline = append(pipeline[:index], pipeline[index+1:]...)
@@ -193,7 +193,7 @@ func onSave() {
 		return
 	}
 
-	err = ioutil.WriteFile(saveFilepath, buf.Bytes(), 0644)
+	err = os.WriteFile(saveFilepath, buf.Bytes(), 0644)
 	if err != nil {
 		g.Msgbox("Error", fmt.Sprintf("Save pipeline failed, error message is %s", err.Error()))
 		return
@@ -230,9 +230,11 @@ func loadSavedPiplines() {
 	}
 }
 
+var pos float32 = 300
+
 func loop() {
 	g.SingleWindow().Layout(g.Layout{
-		g.SplitLayout(g.DirectionVertical, 300,
+		g.SplitLayout(g.DirectionHorizontal, &pos,
 			g.Layout{
 				g.Label("Input - input or paste text below"),
 				g.InputTextMultiline(&input).Size(-1, -1).OnChange(changed),
@@ -270,7 +272,7 @@ func readStdin() {
 
 	if (stat.Mode() & os.ModeCharDevice) == 0 {
 		// Data is being piped to stdin
-		bytes, _ := ioutil.ReadAll(os.Stdin)
+		bytes, _ := io.ReadAll(os.Stdin)
 		input = string(bytes)
 	}
 }
@@ -285,5 +287,7 @@ func main() {
 	loadSavedPiplines()
 
 	wnd := g.NewMasterWindow("PipeIt", 1024, 768, 0)
+	pipe.SetFont()
+
 	wnd.Run(loop)
 }

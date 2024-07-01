@@ -2,7 +2,7 @@
 
 PipeIt is a text transformation, conversion, cleansing and extraction tool.
 
-<img src="https://github.com/AllenDang/PipeIt/blob/master/screenshot/screenshot1.png" alt="PipeIt screen shot1"/>
+<img src="https://github.com/dizorin/PipeIt/blob/master/screenshot/screenshot1.png" alt="PipeIt screen shot1"/>
 
 # Features
 
@@ -26,15 +26,15 @@ PipeIt also supports to read from Stdin, so you could pipe data using "cat file 
 
 ## Extract image links from a html source
 
-<img src="https://github.com/AllenDang/PipeIt/blob/master/screenshot/findimageurl.gif" alt="PipeIt demo to find image urls from html"/>
+<img src="https://github.com/dizorin/PipeIt/blob/master/screenshot/findimageurl.gif" alt="PipeIt demo to find image urls from html"/>
 
 ## Add single quotation mark to every words
 
-<img src="https://github.com/AllenDang/PipeIt/blob/master/screenshot/addquotation.gif" alt="PipeIt demo to add single quotation"/>
+<img src="https://github.com/dizorin/PipeIt/blob/master/screenshot/addquotation.gif" alt="PipeIt demo to add single quotation"/>
 
 ## Replace the comma separated string to lines
 
-<img src="https://github.com/AllenDang/PipeIt/blob/master/screenshot/commatolines.gif" alt="PipeIt demo to replace comma"/>
+<img src="https://github.com/dizorin/PipeIt/blob/master/screenshot/commatolines.gif" alt="PipeIt demo to replace comma"/>
 
 # The reason for creating it
 

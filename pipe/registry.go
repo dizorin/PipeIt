@@ -13,13 +13,14 @@ var (
 func init() {
 	pipeRegistry = make(map[DataType][]*PipeBuilder)
 	pipeRegistry[DataTypeString] = []*PipeBuilder{
-		&PipeBuilder{"Split", "Split input string into string array using regexp expression", NewRegexpSplitPipe},
+		&PipeBuilder{"RegexpSplit", "Split input string into string array using regexp expression", NewRegexpSplitPipe},
 		&PipeBuilder{"Fields", "Fields splits the string s around each instance of one or more consecutive white space characters", NewFieldsPipe},
 		&PipeBuilder{"Table", "Table parse input string to rows and columns", NewTablePipe},
 	}
 	pipeRegistry[DataTypeStringArray] = []*PipeBuilder{
 		&PipeBuilder{"Join", "Join input string array with given separator", NewJoinPipe},
 		&PipeBuilder{"Match", "Match input string array with given regex", NewMatchPipe},
+		&PipeBuilder{"Script", "Run script for each string of input string array", NewScriptPipe},
 		&PipeBuilder{"Surround", "Add prefix and suffix to each element of input string array", NewSurroundPipe},
 		&PipeBuilder{"Replace", "Search and replace for each element of input string array", NewReplacePipe},
 		&PipeBuilder{"Line", "Output input string array line by line", NewLinePipe},

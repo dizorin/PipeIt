@@ -45,6 +45,9 @@ func (j *JoinPipe) GetConfigUI(changed func()) g.Layout {
 }
 
 func (j *JoinPipe) Process(data interface{}) interface{} {
+	if strings.Contains(j.JoinWith, "\\n") {
+		j.JoinWith = strings.ReplaceAll(j.JoinWith, "\\n", "\n")
+	}
 	if strs, ok := data.([]string); ok {
 		return strings.Join(strs, j.JoinWith)
 	}
